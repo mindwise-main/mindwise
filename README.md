@@ -15,9 +15,9 @@ This branch (`test`) serves as the **integration branch** for the MindWise proje
 1. **Pull Before Making Changes** :
    Always pull the latest changes from the `test` branch before starting any new work to ensure you are working with the most up-to-date code. This minimizes the chances of merge conflicts:
    ```bash
-   git push origin test
+   git pull origin test
    
 2. **Push After Committing Your Changes** :
-   After making and committing your changes, push them to the `test` branch. If your changes were made on a separate feature branch, merge them into test via a pull request (PR) instead:
+   After making and committing your changes, push them to the `test` branch and then the working updation from `test` to `main` branch:
    ```bash
-   git pull origin test
+   git push origin test
