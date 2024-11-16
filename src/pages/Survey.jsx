@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import ModuleCard from "../components/ModuleCard";
 import Footer from "../components/Footer";
@@ -18,7 +18,7 @@ const Survey = () => {
         "Thoughts that you would be better off dead, or hurting yourself in some way?",
       ],
       description: "Assess your depressive symptoms with the PHQ-9 questionnaire.",
-      image: "/src/assets/img/phq-img.jpg", // Replace with a valid image path
+      image: "/src/assets/img/phq-img.jpg", // image path
     },
     GAD7: {
       questions: [
@@ -31,7 +31,7 @@ const Survey = () => {
         "Feeling afraid as if something awful might happen?",
       ],
       description: "Evaluate your anxiety levels with the GAD-7 module.",
-      image: "/src/assets/img/gad-img.jpg", // Replace with a valid image path
+      image: "/src/assets/img/gad-img.jpg", // image path
     },
   };
 

@@ -1,4 +1,5 @@
-import React from "react";
+// import React from "react";
+import PropTypes from "prop-types";
 
 const ModuleCard = ({ module, description, image, onSelect }) => {
   return (
@@ -10,7 +11,7 @@ const ModuleCard = ({ module, description, image, onSelect }) => {
       <div className="w-1/3">
         <img
           src={image}
-          alt={module}
+          alt={`Image for ${module}`}
           className="object-cover h-full w-full"
         />
       </div>
@@ -21,6 +22,20 @@ const ModuleCard = ({ module, description, image, onSelect }) => {
       </div>
     </div>
   );
+};
+
+ModuleCard.propTypes = {
+  module: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
+};
+
+ModuleCard.defaultProps = {
+  module: "Default Module",
+  description: "Default Description",
+  image: "default-image.jpg",
+  onSelect: () => {},
 };
 
 export default ModuleCard;
