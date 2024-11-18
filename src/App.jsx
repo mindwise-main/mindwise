@@ -1,7 +1,8 @@
 // import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
-import Survey from './pages/Survey'
+import SurveyModules from './pages/Survey'
+import QuestionForm from './pages/QuestionForm'
 import Consultation from './pages/Consultation'
 import Chatbot from './pages/Chatbot'
 
@@ -14,7 +15,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/consultation" element={<Consultation />} />
         <Route path="/chatbot" element={<Chatbot />} />
-        <Route path="/survey" element={<Survey />} />
+        <Route path="/survey" element={<SurveyModules />} />
+        <Route path="/survey/:moduleId" element={<QuestionForm />} />
       </Routes>
     </Router>
   )
