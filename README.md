@@ -1,23 +1,19 @@
-# MindWise Project - Integration Branch (`test`)
+# MindWise Project - Main Branch (`main`)
 
-This branch (`test`) serves as the **integration branch** for the MindWise project. New features and bug fixes are merged here for testing and validation before being moved to the main branch.
-
----
-
-## **Purpose of the `test` Branch**
-1. To serve as the staging area for new features and fixes.
-2. To test and verify changes before merging into the `main` branch.
-3. To ensure the project remains stable and functional during development.
+This branch (`main`) serves as the **production-ready branch** for the MindWise project. Only thoroughly tested and verified changes are merged into this branch, ensuring stability and reliability.
 
 ---
 
-## **Guidelines for Working on the `test` Branch**
-1. **Pull Before Making Changes** :
-   Always pull the latest changes from the `test` branch before starting any new work to ensure you are working with the most up-to-date code. This minimizes the chances of merge conflicts:
-   ```bash
-   git pull origin test
-   
-2. **Push After Committing Your Changes** :
-   After making and committing your changes, push them to the `test` branch and then the working updation from `test` to `main` branch:
-   ```bash
-   git push origin test
+## **Purpose of the `main` Branch**
+1. To serve as the source of truth for the live, production-ready version of the project.
+2. To ensure that only stable, tested, and approved changes are deployed.
+3. To maintain high-quality code that is free from errors and ready for end users.
+
+---
+
+## **Guidelines for Working on the `main` Branch**
+1. **No Direct Commits**:  
+   Direct commits to the `main` branch are strictly prohibited. All changes must go through the `test` branch and be merged via a pull request (PR).
+
+2. **Merge Only After Testing**:  
+   Changes should only be merged into `main` after being thoroughly tested and reviewed in the `test` branch.
