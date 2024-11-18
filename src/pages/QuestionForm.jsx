@@ -145,8 +145,8 @@ const QuestionForm = () => {
         </div>
         <div>
             <p>Check out other modules</p>
-            <a href="/phq9" className="text-teal-600 p-4">PHQ-9</a>
-            <a href="/gad7" className="text-teal-600 p-4">ABC-5</a>
+            <a href="#" className="text-teal-600 p-4">PHQ-9</a>
+            <a href="#" className="text-teal-600 p-4">ABC-5</a>
 
           </div>
         </>
