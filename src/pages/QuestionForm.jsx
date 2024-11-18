@@ -26,26 +26,126 @@ const QuestionForm = () => {
       "Becoming easily annoyed or irritable?",
       "Feeling afraid as if something awful might happen?",
     ],
+    who5: [
+      "I have felt cheerful and in good spirits",
+      "I have felt calm and relaxed",
+      "I have felt active and vigorous",
+      "I woke up feeling fresh and rested",
+      "My daily life has been filled with things that interest me",
+    ],
+    dass21: [
+      "I found it hard to wind down",
+      "I was aware of dryness of my mouth",
+      "I couldn't seem to experience any positive feeling at all",
+      "I experienced breathing difficulty (eg, excessively rapid breathing, breathlessness in the absence of physical exertion)",
+      "I found it difficult to work up the initiative to do things",
+      "I tended to over-react to situations",
+      "I experienced trembling (eg, in the hands)",
+      "I felt that I was using a lot of nervous energy",
+      "I was worried about situations in which I might panic and make a fool of myself",
+      "I felt that I had nothing to look forward to",
+      "I found myself getting agitated",
+      "I found it difficult to relax",
+      "I felt down-hearted and blue",
+      "I was intolerant of anything that kept me from getting on with what I was doing",
+      "I felt I was close to panic",
+      "I was unable to become enthusiastic about anything",
+      "I felt I wasn't worth much as a person",
+      "I felt that I was rather touchy",
+      "I was aware of the action of my heart in the absence of physical exertion (eg, sense of heart rate increase, heart missing a beat)",
+      "I felt scared without any good reason",
+    ],
+    k10: [
+      "About how often did you feel tired out for no good reason?",
+      "About how often did you feel nervous?",
+      "About how often did you feel so nervous that nothing could calm you down?",
+      "About how often did you feel hopeless?",
+      "About how often did you feel restless or fidgety?",
+      "About how often did you feel so restless you could not sit still?",
+      "About how often did you feel depressed?",
+      "About how often did you feel that everything was an effort?",
+      "About how often did you feel so sad that nothing could cheer you up?",
+      "About how often did you feel worthless?",
+    ],
+    bai: [
+      "Numbness or tingling",
+      "Feeling hot or cold",
+      "Wobbliness in legs",
+      "Unable to relax",
+      "Fear of worst happening",
+      "Dizzy or lightheaded",
+      "Heart pounding or racing",
+      "Unsteady",
+      "Terrified or afraid",
+      "Nervous",
+      "Feeling of choking",
+      "Shaky",
+      "Fear of losing control",
+      "Difficulty breathing",
+      "Fear of dying",
+      "Sweating",
+      "Upset stomach or nausea",
+      "Faint",
+      "Feelings of unreality",
+      "Chest pain or discomfort",
+      "Feeling of choking",
+      "Shaky",
+      "Fear of losing control",
+      "Difficulty breathing",
+      "Fear of dying",
+      "Sweating",
+      "Upset stomach or nausea",
+      "Faint",
+      "Feelings of unreality",
+      "Chest pain or discomfort",
+    ],
+    core10: [
+      "I have felt very anxious or nervous",
+      "I have felt very tense or wound up",
+      "I have felt very depressed or miserable",
+      "I have felt very unhappy or blue",
+      "I have felt very angry or hostile",
+      "I have felt very irritable or easily annoyed",
+      "I have felt very frustrated or impatient",
+      "I have felt very upset or distressed",
+      "I have felt very worried or concerned",
+      "I have felt very scared or afraid",
+    ],
+    pss: [
+      "In the last month, how often have you been upset because of something that happened unexpectedly?",
+      "In the last month, how often have you felt that you were unable to control the important things in your life?",
+      "In the last month, how often have you felt nervous and stressed?",
+      "In the last month, how often have you felt confident about your ability to handle your personal problems?",
+      "In the last month, how often have you felt that things were going your way?",
+      "In the last month, how often have you found that you could not cope with all the things that you had to do?",
+      "In the last month, how often have you been able to control irritations in your life?",
+      "In the last month, how often have you felt that you were on top of things?",
+      "In the last month, how often have you been angered because of things that were outside of your control?",
+      "In the last month, how often have you felt difficulties were piling up so high that you could not overcome them?",
+    ],
   };
 
   const modulesSuggested = [
     {
       id: "phq9",
       name: "PHQ-9",
-      description: "Helps assess depression severity with simple, effective questions.",
-      image: "../../public/assets/phq-img.jpg", // Replace with actual image URLs
+      description:
+        "Helps assess depression severity with simple, effective questions.",
+      image: "../../public/assets/phq9-img.jpg", // Replace with actual image URLs
     },
     {
       id: "gad7",
       name: "GAD-7",
       description: "A quick and accurate measure of anxiety levels.",
-      image: "../../public/assets/gad-img.jpg", // Replace with actual image URLs
+      image: "../../public/assets/gad7-img.jpg", // Replace with actual image URLs
     },
   ];
 
   const selectedQuestions = questions[moduleId] || [];
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Track the current question
-  const [answers, setAnswers] = useState(Array(selectedQuestions.length).fill(null)); // Store answers
+  const [answers, setAnswers] = useState(
+    Array(selectedQuestions.length).fill(null)
+  ); // Store answers
   const [submitted, setSubmitted] = useState(false); // Track if survey is submitted
 
   // Handle answer change
@@ -77,7 +177,8 @@ const QuestionForm = () => {
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl mt-6">
               {/* Display current question */}
               <p className="text-lg font-medium text-gray-700">
-                Question {currentQuestionIndex + 1} of {selectedQuestions.length}
+                Question {currentQuestionIndex + 1} of{" "}
+                {selectedQuestions.length}
               </p>
               <p className="text-lg text-gray-800 mt-4">
                 {selectedQuestions[currentQuestionIndex]}
@@ -143,8 +244,8 @@ const QuestionForm = () => {
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl mt-6 text-center">
               <h2 className="text-2xl font-bold text-teal-600">Your Score</h2>
               <p className="text-lg text-gray-700 mt-4">
-                You scored <span className="font-bold">{calculateScore()}</span> out of{" "}
-                {selectedQuestions.length * 3}.
+                You scored <span className="font-bold">{calculateScore()}</span>{" "}
+                out of {selectedQuestions.length * 3}.
               </p>
               <p className="mt-2">
                 {calculateScore() <= 4
@@ -158,7 +259,9 @@ const QuestionForm = () => {
             </div>
             {/* Suggested Modules */}
             <div className="mt-8 w-full max-w-2xl">
-              <h3 className="text-xl font-bold text-teal-600 mb-4">Modules Suggested</h3>
+              <h3 className="text-xl font-bold text-teal-600 mb-4">
+                Modules Suggested
+              </h3>
               <div className="flex flex-col space-y-4">
                 {modulesSuggested.map((module) => (
                   <div
@@ -171,8 +274,12 @@ const QuestionForm = () => {
                       className="w-16 h-16 rounded-md"
                     />
                     <div>
-                      <h4 className="text-lg font-bold text-gray-800">{module.name}</h4>
-                      <p className="text-sm text-gray-600">{module.description}</p>
+                      <h4 className="text-lg font-bold text-gray-800">
+                        {module.name}
+                      </h4>
+                      <p className="text-sm text-gray-600">
+                        {module.description}
+                      </p>
                     </div>
                   </div>
                 ))}
