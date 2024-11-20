@@ -131,13 +131,13 @@ const QuestionForm = () => {
       name: "PHQ-9",
       description:
         "Helps assess depression severity with simple, effective questions.",
-      image: "../../public/assets/phq9-img.jpg", // Replace with actual image URLs
+      image: "/assets/img/phq9-img.jpg", // Replace with actual image URLs
     },
     {
       id: "gad7",
       name: "GAD-7",
       description: "A quick and accurate measure of anxiety levels.",
-      image: "../../public/assets/gad7-img.jpg", // Replace with actual image URLs
+      image: "/assets/img/gad7-img.jpg", // Replace with actual image URLs
     },
   ];
 
