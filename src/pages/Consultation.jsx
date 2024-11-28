@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { FaCalendarAlt } from "react-icons/fa";
 import Calendar from "react-calendar"; // Install via `npm install react-calendar`
 import "react-calendar/dist/Calendar.css";
+import Footer from "../components/Footer";
 
 const Consultation = () => {
   const [step, setStep] = useState(1); // To track the current step

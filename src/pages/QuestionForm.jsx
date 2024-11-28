@@ -266,6 +266,12 @@ const QuestionForm = () => {
                 {modulesSuggested.map((module) => (
                   <div
                     key={module.id}
+                    // link to the module:id page
+                    onClick={() => {
+                      // Redirect to the module page
+
+
+                    }}
                     className="bg-white p-4 rounded-lg shadow-md flex items-center space-x-4"
                   >
                     <img

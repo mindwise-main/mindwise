@@ -113,9 +113,7 @@ const Home = () => {
   const [visibleConditions, setVisibleConditions] = useState(6);
 
   const toggleConditions = () => {
-    setVisibleConditions((prev) =>
-      prev === 6 ? allConditions.length : 6
-    );
+    setVisibleConditions((prev) => (prev === 6 ? allConditions.length : 6));
   };
 
   return (
@@ -123,18 +121,45 @@ const Home = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <header className="bg-teal-500 text-white py-20 px-6 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-5xl font-bold mb-4">Empowering Your Mental Well-being</h1>
-          <p className="text-lg mb-8">
-            Discover expert mental health support through consultations, assessments, and chatbot assistance.
+      <header className="relative  bg-teal-500 text-white py-20 px-6">
+        {/* Background Banner */}
+        <div
+          className="absolute inset-0 bg-cover w-screen bg-center opacity-70"
+          style={{ backgroundImage: "url('https://img.freepik.com/free-vector/clean-medical-background_53876-97927.jpg?t=st=1732176964~exp=1732180564~hmac=b4d25549789f89c104b1eb47a636e75d827ff0f01e305cc229b528f02ff2e854&w=1380')" }}
+        ></div>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-teal-700 bg-opacity-50"></div>
+
+        {/* Content */}
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
+            Empowering Your Mental Well-being
+          </h1>
+          <p className="text-lg md:text-2xl mb-8">
+            Discover expert mental health support through consultations,
+            assessments, and chatbot assistance.
           </p>
           <Link
             to="/consultation"
-            className="px-8 py-4 bg-white text-teal-600 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition duration-300"
+            className="px-8 py-4 bg-white text-teal-600 font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition duration-300"
           >
             Get Started
           </Link>
+        </div>
+
+        {/* Decorative Bottom Wave */}
+        <div className="absolute top-0 bottom-20 left-0 right-0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 320"
+            className=""
+          >
+            <path
+              fill="#0D9488"
+              d="M0,96L48,85.3C96,75,192,53,288,64C384,75,480,117,576,128C672,139,768,117,864,101.3C960,85,1056,75,1152,90.7C1248,107,1344,149,1392,170.7L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+            ></path>
+          </svg>
         </div>
       </header>
 
@@ -144,7 +169,10 @@ const Home = () => {
           {/* Left Section */}
           <div>
             <span className="text-sm bg-red-100 text-red-600 py-1 px-2 rounded-full inline-block mb-4">
-              Specially designed for <em><strong>Students</strong></em> 
+              Specially designed for{" "}
+              <em>
+                <strong>Students</strong>
+              </em>
             </span>
             <h1 className="text-5xl font-bold text-gray-800 leading-tight mb-6">
               Therapy, tailored <br /> for you.
@@ -173,10 +201,7 @@ const Home = () => {
                 Individual
               </h3>
               <p className="text-sm text-gray-600 mb-2">For Myself</p>
-              <Link
-                to="/#"
-                className="text-teal-600 font-semibold text-sm"
-              >
+              <Link to="/#" className="text-teal-600 font-semibold text-sm">
                 Learn More →
               </Link>
             </div>
@@ -188,10 +213,7 @@ const Home = () => {
               <p className="text-sm text-gray-600 mb-2">
                 For Me and my partner
               </p>
-              <Link
-                to="/#"
-                className="text-teal-600 font-semibold text-sm"
-              >
+              <Link to="/#" className="text-teal-600 font-semibold text-sm">
                 Learn More →
               </Link>
             </div>
@@ -201,10 +223,7 @@ const Home = () => {
                 Psychiatry
               </h3>
               <p className="text-sm text-gray-600 mb-2">Medication</p>
-              <Link
-                to="/#"
-                className="text-teal-600 font-semibold text-sm"
-              >
+              <Link to="/#" className="text-teal-600 font-semibold text-sm">
                 Learn More →
               </Link>
             </div>
@@ -214,7 +233,10 @@ const Home = () => {
                 Mental ChatBot
               </h3>
               <p className="text-sm text-gray-600 mb-2">24 × 7 Support</p>
-              <Link to="/chatbot" className="text-teal-600 font-semibold text-sm">
+              <Link
+                to="/chatbot"
+                className="text-teal-600 font-semibold text-sm"
+              >
                 Learn More →
               </Link>
             </div>
@@ -321,14 +343,14 @@ const Home = () => {
           {/* Feature Cards */}
           <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition duration-300">
             <img
-              src="/assets/img/consultation.jpg"
+              src="/assets/png/what-we-offer/consultation.png"
               alt="Consultation"
               className="w-16 h-16 mx-auto mb-4"
             />
             <h3 className="text-xl font-semibold mb-2">Consultation</h3>
             <p className="text-gray-700">
-              Schedule your meeting with a mental health expert online and get
-              personalized guidance.
+              Schedule meeting with a mental health expert and get personalized
+              guidance.
             </p>
             <Link
               to="/consultation"
@@ -340,7 +362,7 @@ const Home = () => {
 
           <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition duration-300">
             <img
-              src="/assets/img/survey.jpg"
+              src="/assets/png/what-we-offer/survey.png"
               alt="Survey Modules"
               className="w-16 h-16 mx-auto mb-4"
             />
@@ -359,7 +381,7 @@ const Home = () => {
 
           <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition duration-300">
             <img
-              src="/assets/img/chatbot.jpg"
+              src="/assets/png/what-we-offer/doctor.png"
               alt="Psychiatrist Chatbot"
               className="w-16 h-16 mx-auto mb-4"
             />

@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="flex justify-between items-center bg-teal-600 text-white px-6 py-4 shadow-md">
+    <nav className="flex justify-between items-center bg-teal-600  text-white px-6 py-4 shadow-md">
       {/* Logo */}
       <div className="flex items-center px-8 space-x-1.5">
         <img
-          src="/assets/png/brain-logo2.png" // Replace with the actual logo path
+          src="/assets/png/logo.png" // Replace with the actual logo path
           alt="MindWise Logo"
           className="w-13 h-11"
         />
