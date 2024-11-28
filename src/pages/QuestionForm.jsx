@@ -1,9 +1,20 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 const QuestionForm = () => {
-  const { moduleId } = useParams(); // Get the dynamic parameter from the URL
+  const { moduleId } = useParams();
+  const navigate = useNavigate();
+
+  const colors = {
+    primary: "#0D9488", // Deep Teal
+    background: "#F9FAFB", // Very Light Gray
+    text: "#374151", // Cool Gray for text
+    selected: "#D1FAE5", // Light Green for selected answers
+    border: "#D1D5DB", // Light Gray for borders
+    white: "#FFFFFF", // Pure White
+    hover: "#0F766E", // Darker Teal for hover effects
+  };
 
   const questions = {
     phq9: [
@@ -123,90 +134,122 @@ const QuestionForm = () => {
       "In the last month, how often have you been angered because of things that were outside of your control?",
       "In the last month, how often have you felt difficulties were piling up so high that you could not overcome them?",
     ],
+
   };
 
-  const modulesSuggested = [
-    {
-      id: "phq9",
-      name: "PHQ-9",
-      description:
-        "Helps assess depression severity with simple, effective questions.",
-      image: "/assets/img/phq9-img.jpg", // Replace with actual image URLs
-    },
-    {
-      id: "gad7",
-      name: "GAD-7",
-      description: "A quick and accurate measure of anxiety levels.",
-      image: "/assets/img/gad7-img.jpg", // Replace with actual image URLs
-    },
-  ];
-
   const selectedQuestions = questions[moduleId] || [];
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Track the current question
-  const [answers, setAnswers] = useState(
-    Array(selectedQuestions.length).fill(null)
-  ); // Store answers
-  const [submitted, setSubmitted] = useState(false); // Track if survey is submitted
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState(Array(selectedQuestions.length).fill(null));
+  const [submitted, setSubmitted] = useState(false);
+  const [timer, setTimer] = useState(3);
 
-  // Handle answer change
   const handleAnswerChange = (value) => {
     const updatedAnswers = [...answers];
     updatedAnswers[currentQuestionIndex] = parseInt(value, 10);
     setAnswers(updatedAnswers);
   };
 
-  // Calculate score
   const calculateScore = () => {
     return answers.reduce((sum, answer) => sum + (answer || 0), 0);
   };
 
-  // Handle submit
   const handleSubmit = () => {
     setSubmitted(true);
   };
 
+  useEffect(() => {
+    if (submitted) {
+      const interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+
+      const timeout = setTimeout(() => {
+        const score = calculateScore();
+        navigate("/dashboard", { state: { score } });
+      }, 3000);
+
+      return () => {
+        clearInterval(interval);
+        clearTimeout(timeout);
+      };
+    }
+  }, [submitted, navigate]);
+
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-100 flex flex-col items-center">
+      <div
+        className="min-h-screen flex flex-col items-center"
+        style={{ backgroundColor: colors.background }}
+      >
         {!submitted ? (
           <>
-            <h1 className="text-4xl font-bold mt-10 text-teal-600">
+            <h1
+              className="text-4xl font-bold mt-10 text-center"
+              style={{ color: colors.primary }}
+            >
               {moduleId.toUpperCase()} Survey
             </h1>
-            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl mt-6">
-              {/* Display current question */}
-              <p className="text-lg font-medium text-gray-700">
-                Question {currentQuestionIndex + 1} of{" "}
-                {selectedQuestions.length}
+            <div
+              className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mt-6 mx-auto"
+              style={{
+                background: "rgba(255, 255, 255, 0.95)",
+                backdropFilter: "blur(10px)",
+                border: `1px solid ${colors.border}`,
+              }}
+            >
+              <p className="text-lg font-medium" style={{ color: colors.text }}>
+                Question {currentQuestionIndex + 1} of {selectedQuestions.length}
               </p>
-              <p className="text-lg text-gray-800 mt-4">
+              <p
+                className="text-lg mt-4 leading-relaxed"
+                style={{ color: colors.primary }}
+              >
                 {selectedQuestions[currentQuestionIndex]}
               </p>
 
               {/* Answer options */}
-              <div className="flex flex-col mt-4 space-y-2">
+              <div className="flex flex-col mt-6 space-y-4">
                 {[0, 1, 2, 3].map((value) => (
-                  <label key={value} className="flex items-center space-x-2">
+                  <label
+                    key={value}
+                    className={`flex items-center p-4 rounded-lg cursor-pointer shadow-sm ${
+                      answers[currentQuestionIndex] === value
+                        ? "border-2 border-teal-600 bg-teal-50"
+                        : "border border-gray-300 hover:bg-gray-100"
+                    }`}
+                    style={{
+                      transition: "background-color 0.3s ease, border 0.3s ease",
+                    }}
+                  >
                     <input
                       type="radio"
                       name={`question-${currentQuestionIndex}`}
                       value={value}
                       checked={answers[currentQuestionIndex] === value}
                       onChange={() => handleAnswerChange(value)}
-                      className="form-radio text-teal-600"
+                      className="hidden"
                     />
-                    <span>{value}</span>
+                    <span
+                      className={`text-lg ${
+                        answers[currentQuestionIndex] === value
+                          ? "text-teal-700 font-bold"
+                          : "text-gray-700"
+                      }`}
+                    >
+                      {value}
+                    </span>
                   </label>
                 ))}
               </div>
 
               {/* Navigation buttons */}
-              <div className="flex justify-between mt-6">
+              <div className="flex justify-between mt-8">
                 {currentQuestionIndex > 0 && (
                   <button
                     onClick={() => setCurrentQuestionIndex((prev) => prev - 1)}
-                    className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none"
+                    className="px-6 py-2 rounded-lg shadow-md text-white"
+                    style={{ backgroundColor: colors.primary }}
                   >
                     Previous
                   </button>
@@ -215,11 +258,11 @@ const QuestionForm = () => {
                   <button
                     onClick={() => setCurrentQuestionIndex((prev) => prev + 1)}
                     disabled={answers[currentQuestionIndex] === null}
-                    className={`px-4 py-2 ${
+                    className={`px-6 py-2 rounded-lg shadow-md ${
                       answers[currentQuestionIndex] === null
-                        ? "bg-gray-300"
-                        : "bg-teal-600 hover:bg-teal-700 text-white"
-                    } rounded-lg focus:outline-none`}
+                        ? "bg-gray-300 text-gray-500"
+                        : "bg-teal-600 text-white hover:bg-teal-700"
+                    }`}
                   >
                     Next
                   </button>
@@ -227,11 +270,11 @@ const QuestionForm = () => {
                   <button
                     onClick={handleSubmit}
                     disabled={answers[currentQuestionIndex] === null}
-                    className={`px-4 py-2 ${
+                    className={`px-6 py-2 rounded-lg shadow-md ${
                       answers[currentQuestionIndex] === null
-                        ? "bg-gray-300"
-                        : "bg-teal-600 hover:bg-teal-700 text-white"
-                    } rounded-lg focus:outline-none`}
+                        ? "bg-gray-300 text-gray-500"
+                        : "bg-teal-600 text-white hover:bg-teal-700"
+                    }`}
                   >
                     Submit
                   </button>
@@ -241,55 +284,28 @@ const QuestionForm = () => {
           </>
         ) : (
           <>
-            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl mt-6 text-center">
-              <h2 className="text-2xl font-bold text-teal-600">Your Score</h2>
-              <p className="text-lg text-gray-700 mt-4">
-                You scored <span className="font-bold">{calculateScore()}</span>{" "}
-                out of {selectedQuestions.length * 3}.
+            {/* Processing Section */}
+            <div
+              className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl mt-20 text-center"
+              style={{
+                background: "rgba(255, 255, 255, 0.95)",
+                backdropFilter: "blur(10px)",
+                border: `1px solid ${colors.border}`,
+              }}
+            >
+              <h2
+                className="text-3xl font-bold"
+                style={{ color: colors.primary }}
+              >
+                Processing Your Survey
+              </h2>
+              <p className="text-lg mt-4" style={{ color: colors.text }}>
+                Redirecting to your dashboard in{" "}
+                <span style={{ color: colors.hover, fontWeight: "bold" }}>
+                  {timer}
+                </span>{" "}
+                seconds...
               </p>
-              <p className="mt-2">
-                {calculateScore() <= 4
-                  ? "Minimal or no issues detected."
-                  : calculateScore() <= 9
-                  ? "Mild issues detected."
-                  : calculateScore() <= 14
-                  ? "Moderate issues detected."
-                  : "Severe issues detected. Please consult a professional."}
-              </p>
-            </div>
-            {/* Suggested Modules */}
-            <div className="mt-8 w-full max-w-2xl">
-              <h3 className="text-xl font-bold text-teal-600 mb-4">
-                Modules Suggested
-              </h3>
-              <div className="flex flex-col space-y-4">
-                {modulesSuggested.map((module) => (
-                  <div
-                    key={module.id}
-                    // link to the module:id page
-                    onClick={() => {
-                      // Redirect to the module page
-
-
-                    }}
-                    className="bg-white p-4 rounded-lg shadow-md flex items-center space-x-4"
-                  >
-                    <img
-                      src={module.image}
-                      alt={module.name}
-                      className="w-16 h-16 rounded-md"
-                    />
-                    <div>
-                      <h4 className="text-lg font-bold text-gray-800">
-                        {module.name}
-                      </h4>
-                      <p className="text-sm text-gray-600">
-                        {module.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
           </>
         )}
