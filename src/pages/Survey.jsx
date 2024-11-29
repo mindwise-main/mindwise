@@ -1,145 +1,96 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import ModuleCard from "../components/ModuleCard";
 import Footer from "../components/Footer";
 
-const Survey = () => {
-  const surveyModules = {
-    PHQ9: {
-      questions: [
-        "Little interest or pleasure in doing things?",
-        "Feeling down, depressed, or hopeless?",
-        "Trouble falling or staying asleep, or sleeping too much?",
-        "Feeling tired or having little energy?",
-        "Poor appetite or overeating?",
-        "Feeling bad about yourself — or that you are a failure?",
-        "Trouble concentrating on things, such as reading or watching TV?",
-        "Moving or speaking so slowly that others noticed? Or being fidgety or restless?",
-        "Thoughts that you would be better off dead, or hurting yourself in some way?",
-      ],
-      description: "Assess your depressive symptoms with the PHQ-9 questionnaire.",
-      image: "/src/assets/img/phq-img.jpg", // image path
+const SurveyModules = () => {
+  const navigate = useNavigate();
+  const modules = [
+    {
+      id: "phq9",
+      name: "PHQ-9 Depression Module",
+      description: "Assess depression severity with a simple and effective scale.",
+      image: "/assets/img/phq9-img.jpg", // Replace with actual image paths
     },
-    GAD7: {
-      questions: [
-        "Feeling nervous, anxious, or on edge?",
-        "Not being able to stop or control worrying?",
-        "Worrying too much about different things?",
-        "Having trouble relaxing?",
-        "Being so restless that it's hard to sit still?",
-        "Becoming easily annoyed or irritable?",
-        "Feeling afraid as if something awful might happen?",
-      ],
-      description: "Evaluate your anxiety levels with the GAD-7 module.",
-      image: "/src/assets/img/gad-img.jpg", // image path
+    {
+      id: "gad7",
+      name: "GAD-7 Anxiety Module",
+      description: "Measure anxiety levels using this reliable screening tool.",
+      image: "/assets/img/gad7-img.jpg",
     },
-  };
-
-  const [selectedModule, setSelectedModule] = useState(null);
-  const [answers, setAnswers] = useState([]);
-  const [submitted, setSubmitted] = useState(false);
-  const [score, setScore] = useState(0);
-
-  const handleModuleSelect = (module) => {
-    setSelectedModule(module);
-    setAnswers(Array(surveyModules[module].questions.length).fill(0));
-    setSubmitted(false);
-  };
-
-  const handleAnswerChange = (index, value) => {
-    const updatedAnswers = [...answers];
-    updatedAnswers[index] = parseInt(value, 10);
-    setAnswers(updatedAnswers);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const totalScore = answers.reduce((sum, answer) => sum + answer, 0);
-    setScore(totalScore);
-    setSubmitted(true);
-  };
+    {
+      id: "who5",
+      name: "WHO-5 Well-being Index",
+      description: "Evaluate your well-being and quality of life.",
+      image: "/assets/img/who5-img.jpg",
+    },
+    {
+      id: "dass21",
+      name: "DASS-21 Stress Module",
+      description: "Measure depression, anxiety, and stress using this tool.",
+      image: "/assets/img/dass21-img.jpg",
+    },
+    {
+      id: "k10",
+      name: "Kessler K10 Psychological Distress Module",
+      description: "Screen for psychological distress with this effective tool.",
+      image: "/assets/img/k10-img.jpg",
+    },
+    {
+      id: "bai",
+      name: "BAI : Beck Anxiety Inventory",
+      description: "Evaluate anxiety symptoms with the Beck Anxiety Inventory.",
+      image: "/assets/img/bai-img.jpg",
+    },
+    {
+      id: "core10",
+      name: "CORE-10 Psychological Distress Module",
+      description: "Assess psychological well-being with this scale.",
+      image: "/assets/img/core10-img.jpg",
+    },
+    {
+      id: "pss",
+      name: "PSS : Perceived Stress Scale",
+      description: "Measure the perception of stress in your life.",
+      image: "/assets/img/pss-img.jpg",
+    },
+  ];
 
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-100 flex flex-col items-center">
-        <h1 className="text-4xl font-bold mt-10 text-teal-600">
-          Mental Health Survey
-        </h1>
+      <div className="min-h-screen flex flex-col items-center">
+        <h1 className="text-4xl font-bold mt-10 text-teal-600">Survey Modules</h1>
         <p className="text-lg text-gray-700 mt-4 mb-8 text-center max-w-2xl">
-          Select a module to begin. Answer the questions honestly to assess your
-          mental health.
+          Select a module to begin.
         </p>
-
-        {!selectedModule ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
-            {Object.keys(surveyModules).map((module) => (
-              <ModuleCard
-                key={module}
-                module={module === "PHQ9" ? "PHQ-9 Depression" : "GAD-7 Anxiety"}
-                description={surveyModules[module].description}
-                image={surveyModules[module].image}
-                onSelect={() => handleModuleSelect(module)}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+          {modules.map((module) => (
+            <div
+              key={module.id}
+              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+            >
+              <img
+                src={module.image}
+                alt={module.name}
+                className="w-full h-40 object-cover"
               />
-            ))}
-          </div>
-        ) : !submitted ? (
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl"
-          >
-            <h2 className="text-2xl font-bold text-teal-600 mb-6">
-              {selectedModule === "PHQ9"
-                ? "PHQ-9 Depression Survey"
-                : "GAD-7 Anxiety Survey"}
-            </h2>
-            {surveyModules[selectedModule].questions.map((question, index) => (
-              <div key={index} className="mb-6">
-                <label className="block text-gray-700 font-medium mb-2">
-                  {index + 1}. {question}
-                </label>
-                <div className="flex space-x-4">
-                  {[0, 1, 2, 3].map((value) => (
-                    <label key={value} className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        name={`question-${index}`}
-                        value={value}
-                        checked={answers[index] === value}
-                        onChange={() => handleAnswerChange(index, value)}
-                        className="form-radio text-teal-600"
-                      />
-                      <span>{value}</span>
-                    </label>
-                  ))}
-                </div>
+              <div className="p-4">
+                <h3 className="text-lg font-bold text-gray-800">{module.name}</h3>
+                <p className="text-sm text-gray-600 mt-2">{module.description}</p>
+                <button
+                  onClick={() => navigate(`/survey/${module.id}`)}
+                  className="mt-4 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none"
+                >
+                  Start Survey
+                </button>
               </div>
-            ))}
-            <button
-              type="submit"
-              className="w-full py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400"
-            >
-              Submit Survey
-            </button>
-          </form>
-        ) : (
-          <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl text-center">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600">Survey Results</h2>
-            <p className="text-lg text-gray-700 mb-6">
-              Your total score is <span className="font-bold">{score}</span>.
-            </p>
-            <button
-              onClick={() => setSelectedModule(null)}
-              className="mt-6 py-3 px-6 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400"
-            >
-              Back to Modules
-            </button>
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
       </div>
       <Footer />
     </>
   );
 };
 
-export default Survey;
+export default SurveyModules;
