@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+backend/.env
+backend/blogging-website-202c6-firebase-adminsdk-z0n2u-9f830f09ee.json
+frontend/.env

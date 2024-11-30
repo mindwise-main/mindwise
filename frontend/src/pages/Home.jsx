@@ -121,57 +121,33 @@ const Home = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <header className="relative  bg-teal-500 text-white py-20 px-6">
-        {/* Background Banner */}
-        <div
-          className="absolute inset-0 bg-cover w-screen bg-center opacity-70"
-          style={{ backgroundImage: "url('https://img.freepik.com/free-vector/clean-medical-background_53876-97927.jpg?t=st=1732176964~exp=1732180564~hmac=b4d25549789f89c104b1eb47a636e75d827ff0f01e305cc229b528f02ff2e854&w=1380')" }}
-        ></div>
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-teal-700 bg-opacity-50"></div>
-
-        {/* Content */}
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
+      <header className="bg-teal-500 text-white py-20 px-6 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-5xl font-bold mb-4">
             Empowering Your Mental Well-being
           </h1>
-          <p className="text-lg md:text-2xl mb-8">
+          <p className="text-lg mb-8">
             Discover expert mental health support through consultations,
             assessments, and chatbot assistance.
           </p>
           <Link
             to="/consultation"
-            className="px-8 py-4 bg-white text-teal-600 font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition duration-300"
+            className="px-8 py-4 bg-white text-teal-600 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition duration-300"
           >
             Get Started
           </Link>
         </div>
-
-        {/* Decorative Bottom Wave */}
-        <div className="absolute top-0 bottom-20 left-0 right-0">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1440 320"
-            className=""
-          >
-            <path
-              fill="#0D9488"
-              d="M0,96L48,85.3C96,75,192,53,288,64C384,75,480,117,576,128C672,139,768,117,864,101.3C960,85,1056,75,1152,90.7C1248,107,1344,149,1392,170.7L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
-            ></path>
-          </svg>
-        </div>
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gray-100 py-16 px-6 md:px-20">
+      <section className="bg-grey py-16 px-6 md:px-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left Section */}
           <div>
             <span className="text-sm bg-red-100 text-red-600 py-1 px-2 rounded-full inline-block mb-4">
               Specially designed for{" "}
               <em>
-                <strong>Students</strong>
+                <span className="font-semibold">Students</span>
               </em>
             </span>
             <h1 className="text-5xl font-bold text-gray-800 leading-tight mb-6">
@@ -197,7 +173,7 @@ const Home = () => {
           <div className="grid grid-cols-2 gap-4">
             {/* Card 1 */}
             <div className="bg-blue-100 p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300">
-              <h3 className="text-xl font-semibold text-gray-800 mb-1">
+              <h3 className="text-xl font-normal text-gray-800 mb-1">
                 Individual
               </h3>
               <p className="text-sm text-gray-600 mb-2">For Myself</p>
@@ -207,7 +183,7 @@ const Home = () => {
             </div>
             {/* Card 2 */}
             <div className="bg-green-100 p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300">
-              <h3 className="text-xl font-semibold text-gray-800 mb-1">
+              <h3 className="text-xl font-normal text-gray-800 mb-1">
                 Couple
               </h3>
               <p className="text-sm text-gray-600 mb-2">
@@ -219,7 +195,7 @@ const Home = () => {
             </div>
             {/* Card 3 */}
             <div className="bg-yellow-100 p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300">
-              <h3 className="text-xl font-semibold text-gray-800 mb-1">
+              <h3 className="text-xl font-normal text-gray-800 mb-1">
                 Psychiatry
               </h3>
               <p className="text-sm text-gray-600 mb-2">Medication</p>
@@ -229,7 +205,7 @@ const Home = () => {
             </div>
             {/* Card 4 */}
             <div className="bg-purple-100 p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300">
-              <h3 className="text-xl font-semibold text-gray-800 mb-1">
+              <h3 className="text-xl font-normal text-gray-800 mb-1">
                 Mental ChatBot
               </h3>
               <p className="text-sm text-gray-600 mb-2">24 × 7 Support</p>
@@ -245,7 +221,7 @@ const Home = () => {
       </section>
 
       {/* Middle Section */}
-      <section className="bg-gray-50 py-16 px-6 md:px-20">
+      <section className=" py-16 px-6 md:px-20">
         <div className="max-w-6xl mx-auto text-center">
           <h3 className="text-3xl md:text-5xl font-serif text-gray-700 font-light mb-10">
             How MindWise Works
@@ -305,9 +281,9 @@ const Home = () => {
                   alt={condition.title}
                   className="w-14 h-14 mb-4 mx-auto"
                 />
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                <h4 className="text-xl2 font-medium text-gray-800 mb-2">
                   {condition.title}
-                </h3>
+                </h4>
                 <p className="text-sm text-gray-700 mb-4">
                   {condition.description}
                 </p>

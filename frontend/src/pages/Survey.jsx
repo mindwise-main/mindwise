@@ -79,7 +79,7 @@ const SurveyModules = () => {
                 <p className="text-sm text-gray-600 mt-2">{module.description}</p>
                 <button
                   onClick={() => navigate(`/survey/${module.id}`)}
-                  className="mt-4 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none"
+                  className="mt-4 px-4 py-2 bg-black text-white rounded-md hover:bg-teal-700 focus:outline-none"
                 >
                   Start Survey
                 </button>
